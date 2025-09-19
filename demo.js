@@ -25,6 +25,23 @@ app.get("/reflectedxssone", (req, res) => {
   res.send(htmlContent);
 });
 
+app.get("/reflectedxsstwo", (req, res) => {
+  const url =
+    req.query.url.replaceAll("<", "").replaceAll(">", "").replaceAll('"', "") ||
+    "https://taylorswift.com ";
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head><Title>XSS Demo Two</Title></head>
+        <body>
+            <h1>Welcome Everone</h1>
+            <a href="${url}">Click here to visit your site</a>
+        </body>
+    </html>`;
+
+  res.send(htmlContent);
+});
+
 const PORT = process.env.PORT || 9999;
 
 app.listen(PORT, () => {
