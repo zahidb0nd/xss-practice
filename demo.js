@@ -11,7 +11,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/reflectedxssone", (req, res) => {
-  const name = req.query.name.replace("<", "").replace(">", "") || "guest ";
+  const name =
+    req.query.name.replaceAll("<", "").replaceAll(">", "") || "guest ";
   const htmlContent = `
     <!DOCTYPE html>
     <html lang="en">
